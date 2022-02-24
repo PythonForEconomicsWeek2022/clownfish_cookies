@@ -6,7 +6,7 @@ import geopandas as gpd
 import json
 import os
 
-df = pd.read_excel(r'C:\Users\ishaa\Downloads\Population_by regions_UK_2000 to 2020.xlsx')
+df = pd.read_excel('Population_by regions_UK_2000 to 2020.xlsx')
 
 fig, ax = plt.subplots(5,2, figsize=(20,40))
 
@@ -96,7 +96,7 @@ df2 = df.pivot_table('Total_population', ['Region_Name'], 'Year')
 df2.rename({'Yorkshire and The Humber':'Yorkshire and the Humber'}, inplace = True)
 df2['Region']= df2.index
 
-uk_geojson = gpd.read_file(r'C:\Users\ishaa\Downloads\uk_regions.geojson')
+uk_geojson = gpd.read_file('uk_regions.geojson')
 new = uk_geojson.drop([uk_geojson.index[9], uk_geojson.index[10]])
 merged = new.set_index('rgn19nm').join(df2.set_index('Region'))
 merged.reset_index()
@@ -113,11 +113,8 @@ for year in list_of_years:
             xy=(0, 0.1), xycoords='figure fraction',
             horizontalalignment='left', verticalalignment='top',
             fontsize=35)
-    filepath = os.path.join(output_path, str(year)+'_Population.jpg')
-    chart = fig.get_figure()
-    chart.savefig(filepath, dpi=300)
 
-temp = pd.read_csv(r'C:\Users\ishaa\Downloads\weekly_max_min_Friday.csv', parse_dates = ['date'])
+temp = pd.read_csv('weekly_max_min_Friday.csv', parse_dates = ['date'])
 temp['year']= pd.DatetimeIndex(temp['date']).year
 
 fig, ax = plt.subplots(5,2, figsize=(20,40))
@@ -232,7 +229,7 @@ temp2 = temp.pivot_table('min', ['region_name'], 'year')
 temp2.rename({'Yorkshire and The Humber':'Yorkshire and the Humber'}, inplace = True)
 temp2['Region']= temp2.index
 
-uk_geojson = gpd.read_file(r'C:\Users\ishaa\Downloads\uk_regions.geojson')
+uk_geojson = gpd.read_file('uk_regions.geojson')
 new = uk_geojson.drop([uk_geojson.index[9], uk_geojson.index[10]])
 merged2 = new.set_index('rgn19nm').join(temp2.set_index('Region'))
 merged2.reset_index()
@@ -250,9 +247,6 @@ for year in list_of_years:
             xy=(0, 0.1), xycoords='figure fraction',
             horizontalalignment='left', verticalalignment='top',
             fontsize=35)
-    filepath = os.path.join(output_path, str(year)+'_Min Temperature.jpg')
-    chart = fig.get_figure()
-    chart.savefig(filepath, dpi=300)
     
 list_of_years = [2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020]
 vmin, vmax = 13, 20
@@ -277,11 +271,8 @@ for year in list_of_years:
             xy=(0, 0.1), xycoords='figure fraction',
             horizontalalignment='left', verticalalignment='top',
             fontsize=35)
-    filepath = os.path.join(output_path, str(year)+'_Max Temperature.jpg')
-    chart = fig.get_figure()
-    chart.savefig(filepath, dpi=300)
     
-final = pd.read_excel(r'C:\Users\ishaa\Downloads\final.xlsx')
+final = pd.read_excel('final.xlsx')
 final
 
 fig, ax = plt.subplots(5,2, figsize=(20,40))
@@ -359,6 +350,3 @@ for year in list_of_years:
             xy=(0, 0.1), xycoords='figure fraction',
             horizontalalignment='left', verticalalignment='top',
             fontsize=35)
-    filepath = os.path.join(output_path, str(year)+'_Mortality.jpg')
-    chart = fig.get_figure()
-    chart.savefig(filepath, dpi=300)

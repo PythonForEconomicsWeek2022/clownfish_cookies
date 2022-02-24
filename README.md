@@ -5,5 +5,7 @@ This code explores the relationship between inequality and mortality due to extr
 # Topics covered using this data
 
 Correlation between temperature and mortality
+
 Panel data analysis
+
 Motivation
